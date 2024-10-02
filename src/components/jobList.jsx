@@ -4,19 +4,30 @@ import EditJob from "./editJob";
 
 import edit from "../assets/edit.svg";
 import trash from "../assets/trash.svg";
+import DeleteConfirmModal from "./modal/deleteConfirm";
 
 function JobList() {
   const { jobs, deleteJob } = useJobs();
   const [isEditOpen, setEditOpen] = useState(false);
+  const [isDeleteModalOpen, setDeleteModalOpen] = useState(false);
   const [jobToEdit, setJobToEdit] = useState(null);
+  const [jobToDelete, setJobToDelete] = useState(null);
 
   const goToEdit = (job) => {
     setJobToEdit(job);
     setEditOpen(true);
   };
 
-  const goToDelete = (jobId) => {
-    deleteJob(jobId);
+  const goToDelete = (job) => {
+    setJobToDelete(job);
+    setDeleteModalOpen(true);
+  };
+
+  const confirmDelete = () => {
+    if (jobToDelete) {
+      deleteJob(jobToDelete.id);
+      setDeleteModalOpen(false);
+    }
   };
 
   return (
@@ -70,6 +81,14 @@ function JobList() {
           isOpen={isEditOpen}
           onClose={() => setEditOpen(false)}
           jobToEdit={jobToEdit}
+        />
+      )}
+
+      {isDeleteModalOpen && (
+        <DeleteConfirmModal
+          isOpen={isDeleteModalOpen}
+          onClose={() => setDeleteModalOpen(false)}
+          onDeleteConfirm={confirmDelete}
         />
       )}
     </ul>
