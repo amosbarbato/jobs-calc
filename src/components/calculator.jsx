@@ -1,11 +1,28 @@
+import { useState } from "react";
+import { useJobs } from "../context/jobContext";
+
 import right from "../assets/arrow-right.svg";
 
-function CalcHourlyRate() {
-  return (
-    <div className="bg-gray-100 min-h-screen">
+function CalcHourlyRate(isOpen, onClose) {
+  const { calculateHourlyRate, hourlyRate } = useJobs();
+  const [monthlyIncome, setMonthlyIncome] = useState("");
+  const [hoursPerDay, setHoursPerDay] = useState("");
+  const [daysPerWeek, setDaysPerWeek] = useState("");
+
+  const goToSubmit = () => {
+    calculateHourlyRate(
+      Number(monthlyIncome),
+      Number(hoursPerDay),
+      Number(daysPerWeek)
+    );
+    onClose();
+  };
+
+  return isOpen ? (
+    <div className="bg-gray-100 min-h-screen relative z-10 -mt-6">
       <header className="py-8 bg-zinc-700 p-12">
         <div className="text-gray-300 font-semibold flex items-center">
-          <button>
+          <button onClick={onClose}>
             <img src={right} alt="" />
           </button>
           <h1 className="mx-auto">Calculadora</h1>
@@ -17,8 +34,17 @@ function CalcHourlyRate() {
           <img src="" alt="" />
           <p className="text-center mt-4 text-gray-600">
             O valor da sua hora é <br />
-            <strong className="text-xl">R$ 7000,00</strong>
+            {hourlyRate > 0 && (
+              <strong className="text-xl">R$ {hourlyRate.toFixed(2)}</strong>
+            )}
           </p>
+
+          <button
+            onClick={goToSubmit}
+            className="uppercase flex gap-4 bg-orange-400 h-fit px-3 py-2 rounded items-center hover:brightness-110 transition-all"
+          >
+            <p className="px-6 text-xs font-bold">Calcular</p>
+          </button>
         </aside>
 
         <main>
@@ -28,7 +54,7 @@ function CalcHourlyRate() {
           <div className="flex gap-4">
             <div className="grid gap-3">
               <label
-                htmlFor="monthly-budget"
+                htmlFor="monthly-income"
                 className="text-gray-500 font-medium text-sm"
               >
                 Quanto eu <br />
@@ -38,9 +64,11 @@ function CalcHourlyRate() {
               <input
                 className="px-4 py-2 border rounded-sm text-sm"
                 type="amount"
-                id="monthly-budget"
-                name="monthly-budget"
+                id="monthly-income"
+                name="monthly-income"
                 placeholder="R$"
+                value={monthlyIncome}
+                onChange={(e) => setMonthlyIncome(e.target.value)}
               />
             </div>
 
@@ -58,6 +86,8 @@ function CalcHourlyRate() {
                 type="number"
                 id="hours-per-day"
                 name="hours-per-day"
+                value={hoursPerDay}
+                onChange={(e) => setHoursPerDay(e.target.value)}
               />
             </div>
           </div>
@@ -76,13 +106,15 @@ function CalcHourlyRate() {
                 id="days-per-week"
                 name="days-per-week"
                 placeholder="R$"
+                value={daysPerWeek}
+                onChange={(e) => setDaysPerWeek(e.target.value)}
               />
             </div>
           </div>
         </main>
       </div>
     </div>
-  );
+  ) : null;
 }
 
 export default CalcHourlyRate;
