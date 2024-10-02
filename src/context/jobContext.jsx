@@ -9,14 +9,21 @@ export const useJobs = () => {
 
 export const JobsProvider = ({ children }) => {
   const [hourlyRate, setHourlyRate] = useState(0);
+  const [jobs, setJobs] = useState([]);
 
   const calculateHourlyRate = (monthlyIncome, hoursPerDay, daysPerWeek) => {
     const rate = calculateRate(monthlyIncome, hoursPerDay, daysPerWeek);
     setHourlyRate(rate);
   };
 
+  const addJob = (job) => {
+    setJobs([...jobs, job]);
+  };
+
   return (
-    <JobContext.Provider value={{ hourlyRate, calculateHourlyRate }}>
+    <JobContext.Provider
+      value={{ hourlyRate, calculateHourlyRate, jobs, addJob }}
+    >
       {children}
     </JobContext.Provider>
   );

@@ -3,7 +3,7 @@ import { useJobs } from "../context/jobContext";
 
 import right from "../assets/arrow-right.svg";
 
-function CalcHourlyRate(isOpen, onClose) {
+function CalcHourlyRate({ isOpen, onClose }) {
   const { calculateHourlyRate, hourlyRate } = useJobs();
   const [monthlyIncome, setMonthlyIncome] = useState("");
   const [hoursPerDay, setHoursPerDay] = useState("");
