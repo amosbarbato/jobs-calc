@@ -19,7 +19,7 @@ function CalcHourlyRate(isOpen, onClose) {
   };
 
   return isOpen ? (
-    <div className="bg-gray-100 min-h-screen relative z-10 -mt-6">
+    <div className="bg-gray-100 min-h-screen relative z-10 -mt-[265px]">
       <header className="py-8 bg-zinc-700 p-12">
         <div className="text-gray-300 font-semibold flex items-center">
           <button onClick={onClose}>
