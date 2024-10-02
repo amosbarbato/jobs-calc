@@ -5,23 +5,34 @@ import { JobsProvider } from "./context/jobContext";
 
 import logo from "./assets/logo.svg";
 import plus from "./assets/plus.svg";
+import JobRegister from "./components/addJob";
+import JobList from "./components/jobList";
 
 export default function App() {
-  const [isHourlyRateModalOpen, setHourlyRateModalOpen] = useState(false);
+  const [isCalculatorOpen, setCalculatorOpen] = useState(false);
+  const [isJobRegisterOpen, setJobRegisterOpen] = useState(false);
 
-  function openHourlyRateModal() {
-    setHourlyRateModalOpen(true);
+  function openCalculator() {
+    setCalculatorOpen(true);
   }
 
-  function closeHourlyRateModal() {
-    setHourlyRateModalOpen(false);
+  function closeCalculator() {
+    setCalculatorOpen(false);
+  }
+
+  function openRegister() {
+    setJobRegisterOpen(true);
+  }
+
+  function closeRegister() {
+    setJobRegisterOpen(false);
   }
 
   return (
     <JobsProvider>
       {/* header component */}
       <header className="bg-zinc-700 text-zinc-100 p-8">
-        <div className="max-w-4xl mx-auto">
+        <div className="max-w-5xl mx-auto">
           <section
             id="top"
             className="flex justify-between items-center border-b border-b-zinc-600 pb-8"
@@ -30,7 +41,7 @@ export default function App() {
             <button
               id="calc-profile"
               className="flex items-center gap-4"
-              onClick={() => setHourlyRateModalOpen(true)}
+              onClick={() => setCalculatorOpen(true)}
             >
               <div className="grid text-end">
                 <strong className="text-xl">Valor por Hora</strong>
@@ -57,7 +68,10 @@ export default function App() {
               </div>
             </div>
 
-            <button className="uppercase flex gap-4 bg-orange-400 h-fit px-3 py-2 rounded items-center hover:brightness-110 transition-all">
+            <button
+              onClick={() => setJobRegisterOpen(true)}
+              className="uppercase flex gap-4 bg-orange-400 h-fit px-3 py-2 rounded items-center hover:brightness-110 transition-all"
+            >
               <span className="bg-opacity-10 bg-white rounded p-0.5">
                 <img src={plus} alt="Adicionar Novo Job" />
               </span>
@@ -67,12 +81,20 @@ export default function App() {
         </div>
       </header>
 
+      <main className="max-w-5xl mx-auto -mt-8">
+        <JobList />
+      </main>
+
       {/* hourlyRateCalc component */}
-      {isHourlyRateModalOpen && (
+      {isCalculatorOpen && (
         <CalcHourlyRate
-          isOpen={openHourlyRateModal}
-          onClose={closeHourlyRateModal}
+          isOpen={openCalculator}
+          onClose={() => setCalculatorOpen(false)}
         />
+      )}
+
+      {isJobRegisterOpen && (
+        <JobRegister isOpen={openRegister} onClose={closeRegister} />
       )}
     </JobsProvider>
   );
