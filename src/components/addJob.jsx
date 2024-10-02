@@ -1,6 +1,7 @@
 import { useState } from "react";
 import right from "../assets/arrow-right.svg";
 import { useJobs } from "../context/jobContext";
+import { v4 as uuidv4 } from "uuid";
 
 function JobRegister({ isOpen, onClose }) {
   const { hourlyRate, addJob, jobs } = useJobs();
@@ -12,12 +13,21 @@ function JobRegister({ isOpen, onClose }) {
     const jobCost = hourlyRate * estimatedHours;
     const jobDeadline = estimatedHours / dailyHours;
 
-    addJob({ jobName, jobCost, jobDeadline });
+    const newJob = {
+      id: uuidv4(),
+      jobName,
+      dailyHours,
+      estimatedHours,
+      jobCost,
+      jobDeadline,
+    };
+
+    addJob(newJob);
     onClose();
   };
 
   return isOpen ? (
-    <div className="bg-gray-100 min-h-screen relative z-10 -mt-[265px]">
+    <div className="fixed inset-0 bg-gray-100 min-h-screen">
       <header className="py-8 bg-zinc-700 p-12">
         <div className="text-gray-300 font-semibold flex items-center">
           <button onClick={onClose}>
