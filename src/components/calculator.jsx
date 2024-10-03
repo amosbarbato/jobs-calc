@@ -1,9 +1,14 @@
 import { useState } from "react";
 import { useJobs } from "../context/jobContext";
 
-import right from "../assets/arrow-right.svg";
-import calc from "../assets/calc.png";
+import Title from "./ui/title";
+import Form from "./ui/form";
+import Aside from "./ui/aside";
+import Label from "./ui/label";
+import Input from "./ui/input";
 import Button from "./ui/button";
+
+import calc from "../assets/calc.png";
 
 function CalcHourlyRate({ isOpen, onClose }) {
   const { calculateHourlyRate, hourlyRate } = useJobs();
@@ -23,47 +28,32 @@ function CalcHourlyRate({ isOpen, onClose }) {
 
   return isOpen ? (
     <div className="fixed inset-0 bg-gray-100 min-h-screen">
-      <header className="py-8 bg-zinc-700 p-12">
-        <div className="text-gray-300 font-semibold flex items-center">
-          <button onClick={onClose}>
-            <img src={right} alt="Voltar" />
-          </button>
-          <h1 className="mx-auto">Calculadora</h1>
-        </div>
-      </header>
+      <Title onClick={onClose} title="Calculadora" />
 
       <div className="flex justify-between py-12 max-w-5xl mx-auto">
-        <aside className="w-80 flex flex-col items-center gap-6 bg-white border border-gray-200 p-16 rounded">
-          <img src={calc} className="w-40" />
-          <p className="text-center text-lg text-gray-600">
+        <Aside>
+          <img src={calc} className="w-20" />
+          <p className="text-center text-sm text-gray-600">
             O valor da sua hora é <br />
-            <strong>R$</strong>{" "}
+            <strong className="text-lg">R$</strong>
             {calculatedRate > 0 && (
-              <strong>{calculatedRate.toFixed(2).replace(".", ",")}</strong>
+              <strong className="text-lg">
+                {calculatedRate.toFixed(2).replace(".", ",")}
+              </strong>
             )}
           </p>
-
           <Button onClick={goToSubmit} variant="submit" size="full">
             <p className="text-xs font-bold">Calcular</p>
           </Button>
-        </aside>
+        </Aside>
 
-        <main className="w-3/5">
-          <h2 className="mt-12 text-3xl font-semibold text-gray-600 border-b pb-8 mb-8">
-            Planejamento
-          </h2>
+        <Form subTitle="Planejamento">
           <div className="grid grid-cols-2 gap-6">
             <div className="grid gap-4">
-              <label
-                htmlFor="monthly-income"
-                className="text-gray-500 font-medium text-sm"
-              >
-                Quanto eu <br />
-                quero ganhar por mês?
-              </label>
-
-              <input
-                className="px-6 py-4 border rounded-sm text-sm text-gray-500 placeholder:text-gray-300 font-semibold placeholder:font-semibold"
+              <Label htmlFor="monthly-income">
+                Quanto eu <br /> quero ganhar por mês?
+              </Label>
+              <Input
                 type="amount"
                 id="monthly-income"
                 name="monthly-income"
@@ -74,16 +64,10 @@ function CalcHourlyRate({ isOpen, onClose }) {
             </div>
 
             <div className="grid gap-4">
-              <label
-                htmlFor="hours-per-day"
-                className="text-gray-500 font-medium text-sm"
-              >
-                Quantas horas <br />
-                quero trabalhar por dia?
-              </label>
-
-              <input
-                className="px-6 py-4 border rounded-sm text-sm text-gray-500 placeholder:text-gray-300 font-semibold placeholder:font-semibold"
+              <Label htmlFor="hours-per-day">
+                Quantas horas <br /> quero trabalhar por dia?
+              </Label>
+              <Input
                 type="number"
                 id="hours-per-day"
                 name="hours-per-day"
@@ -95,15 +79,10 @@ function CalcHourlyRate({ isOpen, onClose }) {
 
           <div className="flex gap-4 mt-6">
             <div className="grid gap-3">
-              <label
-                htmlFor="days-per-week"
-                className="text-gray-500 font-medium text-sm"
-              >
+              <Label htmlFor="days-per-week">
                 Quantos dias quero trabalhar por semana?
-              </label>
-
-              <input
-                className="px-6 py-4 border rounded-sm text-sm text-gray-500 placeholder:text-gray-300 font-semibold placeholder:font-semibold"
+              </Label>
+              <Input
                 type="number"
                 id="days-per-week"
                 name="days-per-week"
@@ -112,7 +91,7 @@ function CalcHourlyRate({ isOpen, onClose }) {
               />
             </div>
           </div>
-        </main>
+        </Form>
       </div>
     </div>
   ) : null;
