@@ -5,12 +5,13 @@ import { JobsProvider, useJobs } from "./context/jobContext";
 
 import logo from "./assets/logo.svg";
 import plus from "./assets/plus.svg";
+import calc from "../public/calc.png";
 import JobRegister from "./components/addJob";
 import JobList from "./components/jobList";
 import Summary from "./components/summary";
 
 export default function App() {
-  const { jobs } = useJobs;
+  const { hourlyRate } = useJobs;
   const [isCalculatorOpen, setCalculatorOpen] = useState(false);
   const [isJobRegisterOpen, setJobRegisterOpen] = useState(false);
 
@@ -42,15 +43,18 @@ export default function App() {
             <img src={logo} alt="JobsCalc" />
             <button
               id="calc-profile"
-              className="flex items-center gap-4"
+              className="flex items-center gap-5 hover:text-orange-400 "
               onClick={() => setCalculatorOpen(true)}
             >
               <div className="grid text-end">
                 <strong className="text-xl">Valor por Hora</strong>
-                <span className="text-sm text-zinc-400 hover:text-orange-400 hover:underline transition">
-                  R$ 83,00
-                </span>
+                {hourlyRate > 0 && (
+                  <span className="text-sm text-zinc-400 hover:underline transition">
+                    R$ {hourlyRate.toFixed(2)}
+                  </span>
+                )}
               </div>
+              <img src={calc} className="w-16" />
             </button>
           </section>
 
