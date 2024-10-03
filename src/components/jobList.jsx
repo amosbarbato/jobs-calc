@@ -55,7 +55,7 @@ function JobList() {
               Valor
             </span>
             <h4 className="font-semibold text-zinc-600 leading-7">
-              R$ {job.jobCost.toFixed(2)}
+              R$ {job.jobCost.toFixed(2).replace(".", ",")}
             </h4>
           </div>
 

@@ -1,14 +1,16 @@
 import { useState } from "react";
 import CalcHourlyRate from "./components/calculator";
 
-import { JobsProvider } from "./context/jobContext";
+import { JobsProvider, useJobs } from "./context/jobContext";
 
 import logo from "./assets/logo.svg";
 import plus from "./assets/plus.svg";
 import JobRegister from "./components/addJob";
 import JobList from "./components/jobList";
+import Summary from "./components/summary";
 
 export default function App() {
+  const { jobs } = useJobs;
   const [isCalculatorOpen, setCalculatorOpen] = useState(false);
   const [isJobRegisterOpen, setJobRegisterOpen] = useState(false);
 
@@ -53,20 +55,7 @@ export default function App() {
           </section>
 
           <section id="summary" className="flex justify-between items-center">
-            <div className="flex gap-8 py-8">
-              <div className="total grid">
-                <strong className="text-2xl">12</strong>
-                <p className="text-zinc-400">Projetos ao total</p>
-              </div>
-              <div className="total grid">
-                <strong className="text-2xl">7</strong>
-                <p className="text-zinc-400">Em andamento</p>
-              </div>
-              <div className="total grid">
-                <strong className="text-2xl">4</strong>
-                <p className="text-zinc-400">Encerrados</p>
-              </div>
-            </div>
+            <Summary />
 
             <button
               onClick={() => setJobRegisterOpen(true)}
@@ -87,10 +76,7 @@ export default function App() {
 
       {/* hourlyRateCalc component */}
       {isCalculatorOpen && (
-        <CalcHourlyRate
-          isOpen={openCalculator}
-          onClose={() => setCalculatorOpen(false)}
-        />
+        <CalcHourlyRate isOpen={openCalculator} onClose={closeCalculator} />
       )}
 
       {isJobRegisterOpen && (

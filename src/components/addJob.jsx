@@ -4,7 +4,7 @@ import { useJobs } from "../context/jobContext";
 import { v4 as uuidv4 } from "uuid";
 
 function JobRegister({ isOpen, onClose }) {
-  const { hourlyRate, addJob, jobs } = useJobs();
+  const { hourlyRate, addJob } = useJobs();
   const [jobName, setJobName] = useState("");
   const [dailyHours, setDailyHours] = useState("");
   const [estimatedHours, setEstimatedHours] = useState("");

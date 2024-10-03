@@ -60,6 +60,17 @@ export const JobsProvider = ({ children }) => {
     saveToLocalStorage("jobs", updatedJobs);
   };
 
+  // função para estatisticas de projetos
+  const calculateProjectStats = () => {
+    const totalProjects = jobs.length;
+
+    return {
+      totalProjects,
+    };
+  };
+
+  const projectStats = calculateProjectStats();
+
   return (
     <JobContext.Provider
       value={{
@@ -69,6 +80,7 @@ export const JobsProvider = ({ children }) => {
         addJob,
         editJob,
         deleteJob,
+        projectStats,
       }}
     >
       {children}
