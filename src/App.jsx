@@ -9,6 +9,7 @@ import calc from "./assets/calc.png";
 import JobRegister from "./components/addJob";
 import JobList from "./components/jobList";
 import Summary from "./components/summary";
+import Button from "./components/ui/button";
 
 export default function App() {
   const { hourlyRate } = useJobs;
@@ -61,15 +62,16 @@ export default function App() {
           <section id="summary" className="flex justify-between items-center">
             <Summary />
 
-            <button
+            <Button
               onClick={() => setJobRegisterOpen(true)}
-              className="uppercase flex gap-4 bg-orange-400 h-fit px-3 py-2 rounded items-center hover:brightness-110 transition-all"
+              variant="create"
+              className="ps-3 pe-8 gap-8"
             >
               <span className="bg-opacity-10 bg-white rounded p-0.5">
                 <img src={plus} alt="Adicionar Novo Job" />
               </span>
-              <p className="px-6 text-xs font-bold">Adicionar Novo Job</p>
-            </button>
+              Adicionar Novo Job
+            </Button>
           </section>
         </div>
       </header>

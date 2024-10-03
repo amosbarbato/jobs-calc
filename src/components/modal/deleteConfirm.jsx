@@ -1,4 +1,5 @@
 import trash from "../../assets/trash-48.svg";
+import Button from "../ui/button";
 
 function DeleteConfirmModal({ isOpen, onClose, onDeleteConfirm }) {
   return isOpen ? (
@@ -16,18 +17,13 @@ function DeleteConfirmModal({ isOpen, onClose, onDeleteConfirm }) {
         </div>
 
         <div className="flex justify-end space-x-4">
-          <button
-            onClick={onClose}
-            className="uppercase font-bold text-sm text-zinc-500 bg-zinc-200 hover:opacity-90 h-fit w-[170px] rounded-md py-3"
-          >
+          <Button onClick={onClose} variant="light" size="button">
             Cancelar
-          </button>
-          <button
-            onClick={onDeleteConfirm}
-            className="uppercase font-bold text-sm text-zinc-50 bg-red-600 hover:opacity-90 h-fit w-[170px] rounded-md py-3"
-          >
+          </Button>
+
+          <Button onClick={onDeleteConfirm} variant="delete" size="button">
             Excluir Job
-          </button>
+          </Button>
         </div>
       </div>
     </div>

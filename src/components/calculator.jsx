@@ -3,6 +3,7 @@ import { useJobs } from "../context/jobContext";
 
 import right from "../assets/arrow-right.svg";
 import calc from "../assets/calc.png";
+import Button from "./ui/button";
 
 function CalcHourlyRate({ isOpen, onClose }) {
   const { calculateHourlyRate, hourlyRate } = useJobs();
@@ -42,12 +43,9 @@ function CalcHourlyRate({ isOpen, onClose }) {
             )}
           </p>
 
-          <button
-            onClick={goToSubmit}
-            className="uppercase flex gap-4 justify-center bg-green-600 text-zinc-100 h-fit w-full py-3 rounded items-center hover:brightness-110 transition-all"
-          >
-            <p className="px-6 text-xs font-bold">Calcular</p>
-          </button>
+          <Button onClick={goToSubmit} variant="submit" size="full">
+            <p className="text-xs font-bold">Calcular</p>
+          </Button>
         </aside>
 
         <main className="w-3/5">
