@@ -5,7 +5,7 @@ import { JobsProvider, useJobs } from "./context/jobContext";
 
 import logo from "./assets/logo.svg";
 import plus from "./assets/plus.svg";
-import calc from "../public/calc.png";
+import calc from "./assets/calc.png";
 import JobRegister from "./components/addJob";
 import JobList from "./components/jobList";
 import Summary from "./components/summary";

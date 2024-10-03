@@ -2,7 +2,7 @@ import { useState } from "react";
 import { useJobs } from "../context/jobContext";
 
 import right from "../assets/arrow-right.svg";
-import calc from "../../public/calc.png";
+import calc from "../assets/calc.png";
 
 function CalcHourlyRate({ isOpen, onClose }) {
   const { calculateHourlyRate, hourlyRate } = useJobs();
