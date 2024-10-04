@@ -1,5 +1,6 @@
-import { createContext, useState, useContext, useEffect } from "react";
+import { createContext, useContext } from "react";
 import { calculateHourlyRate as calculateRate } from "../utils/jobUtils";
+import useLocalStorage from "../services/useLocalStorage";
 
 const JobContext = createContext();
 
@@ -8,68 +9,36 @@ export const useJobs = () => {
 };
 
 export const JobsProvider = ({ children }) => {
-  const [hourlyRate, setHourlyRate] = useState(0);
-  const [jobs, setJobs] = useState([]);
+  const [hourlyRate, setHourlyRate] = useLocalStorage("hourlyRate", 0);
+  const [jobs, setJobs] = useLocalStorage("jobs", []);
 
-  // função para salvar no local storage
-  const saveToLocalStorage = (key, value) => {
-    localStorage.setItem(key, JSON.stringify(value));
-  };
-
-  // função para carregar do local storage
-  const loadFromLocalStorage = (key, defaultValue) => {
-    const storedValue = localStorage.getItem(key);
-    return storedValue ? JSON.parse(storedValue) : defaultValue;
-  };
-
-  // carregar dados ao iniciar
-  useEffect(() => {
-    const savedHourlyRate = loadFromLocalStorage("hourlyRate", 0);
-    const savedJobs = loadFromLocalStorage("jobs", []);
-    setHourlyRate(savedHourlyRate);
-    setJobs(savedJobs);
-  }, []);
-
-  // atualizar e salvar o valor por hora no local storage
+  // calcula o valor da taxa por hora
   const calculateHourlyRate = (monthlyIncome, hoursPerDay, daysPerWeek) => {
     const rate = calculateRate(monthlyIncome, hoursPerDay, daysPerWeek);
     setHourlyRate(rate);
-    saveToLocalStorage("hourlyRate", rate);
   };
 
-  // cadastrando um serviço e salvando no local storage
+  // cadastra um novo servico
   const addJob = (job) => {
-    const updatedJobs = [...jobs, job];
-    setJobs(updatedJobs);
-    saveToLocalStorage("jobs", updatedJobs);
+    setJobs((prevJobs) => [...prevJobs, job]);
   };
 
-  // editando dados de um serviço já cadastrado e salvando no local storage
+  // edita um servico cadastrado
   const editJob = (updatedJob) => {
-    const updatedJobs = jobs.map((job) =>
-      job.id === updatedJob.id ? updatedJob : job
+    setJobs((prevJobs) =>
+      prevJobs.map((job) => (job.id === updatedJob.id ? updatedJob : job))
     );
-    setJobs(updatedJobs);
-    saveToLocalStorage("jobs", updatedJobs);
   };
 
-  // excluindo um serviço cadastrado e salvar no local storage
+  // exclui um servico
   const deleteJob = (jobId) => {
-    const updatedJobs = jobs.filter((job) => job.id !== jobId);
-    setJobs(updatedJobs);
-    saveToLocalStorage("jobs", updatedJobs);
+    setJobs((prevJobs) => prevJobs.filter((job) => job.id !== jobId));
   };
 
-  // função para estatisticas de projetos
-  const calculateProjectStats = () => {
-    const totalProjects = jobs.length;
-
-    return {
-      totalProjects,
-    };
+  // exibe o total de servicos
+  const jobStats = {
+    totalJobs: jobs.length,
   };
-
-  const projectStats = calculateProjectStats();
 
   return (
     <JobContext.Provider
@@ -80,7 +49,7 @@ export const JobsProvider = ({ children }) => {
         addJob,
         editJob,
         deleteJob,
-        projectStats,
+        jobStats,
       }}
     >
       {children}
