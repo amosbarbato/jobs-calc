@@ -67,7 +67,7 @@ function JobList() {
               <img src={edit} alt="" />
             </button>
             <button
-              onClick={() => goToDelete(job.id)}
+              onClick={() => goToDelete(job)}
               className="border border-gray-200 p-2 rounded-md hover:bg-gray-100 transition-all"
             >
               <img src={trash} alt="" />
