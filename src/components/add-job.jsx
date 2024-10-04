@@ -24,7 +24,6 @@ function JobRegister({ isOpen, onClose }) {
   }, [hourlyRate, estimatedHours]);
 
   const goToSubmit = () => {
-    // const jobCost = hourlyRate * estimatedHours;
     const jobDeadline = estimatedHours / dailyHours;
 
     const newJob = {
@@ -37,6 +36,7 @@ function JobRegister({ isOpen, onClose }) {
     };
 
     addJob(newJob);
+    onClose();
   };
 
   return isOpen ? (

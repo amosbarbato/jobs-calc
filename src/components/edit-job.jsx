@@ -25,7 +25,6 @@ function EditJob({ isOpen, onClose, jobToEdit }) {
   }, [hourlyRate, estimatedHours]);
 
   const goToSubmit = () => {
-    // const jobCost = hourlyRate * estimatedHours;
     const jobDeadline = estimatedHours / dailyHours;
 
     const updatedJob = {
