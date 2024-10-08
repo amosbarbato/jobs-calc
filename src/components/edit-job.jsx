@@ -41,13 +41,13 @@ function EditJob({ isOpen, onClose, jobToEdit }) {
   };
 
   return isOpen ? (
-    <div className="fixed inset-0 bg-gray-100 min-h-screen">
+    <div className="fixed inset-0 bg-gray-100 min-h-screen max-sm:overflow-scroll">
       <Title onClick={onClose} title="Editar Projeto" />
 
-      <div className="flex justify-between py-12 max-w-5xl mx-auto gap-16">
+      <div className="flex justify-between py-12 max-w-5xl mx-auto gap-16 max-sm:gap-8 max-sm:flex-col max-sm:w-full max-sm:p-8">
         <Form subTitle="Dados do projeto">
-          <div className="space-y-6">
-            <div className="grid gap-4">
+          <div className="space-y-6 max-sm:space-y-4">
+            <div className="grid gap-4 max-sm:gap-2">
               <Label htmlFor="name">Nome do projeto</Label>
               <Input
                 type="text"
@@ -59,10 +59,11 @@ function EditJob({ isOpen, onClose, jobToEdit }) {
               />
             </div>
 
-            <div className="flex gap-6">
-              <div className="grid gap-4">
+            <div className="flex gap-6 max-sm:gap-4 max-sm:flex-col">
+              <div className="grid gap-4 max-sm:gap-2">
                 <Label htmlFor="daily-hours">
-                  Quantas horas <br /> por dia vai dedicar ao job?
+                  Quantas horas <br className="max-sm:hidden" /> por dia vai
+                  dedicar ao job?
                 </Label>
                 <Input
                   type="number"
@@ -73,9 +74,10 @@ function EditJob({ isOpen, onClose, jobToEdit }) {
                   onChange={(e) => setDailyHours(e.target.value)}
                 />
               </div>
-              <div className="grid gap-4">
+              <div className="grid gap-4 max-sm:gap-2">
                 <Label htmlFor="total-hours">
-                  Estimativa de <br /> horas para esse Job?
+                  Estimativa de <br className="max-sm:hidden" /> horas para esse
+                  Job?
                 </Label>
                 <Input
                   type="number"
@@ -90,7 +92,7 @@ function EditJob({ isOpen, onClose, jobToEdit }) {
           </div>
         </Form>
         <Aside>
-          <img src={money} alt="Valor do Projeto" />
+          <img src={money} alt="Valor do Projeto" className="max-sm:hidden" />
           <p className="text-center text-sm text-gray-600">
             O valor do projeto ficou em <br />
             <strong className="text-lg">

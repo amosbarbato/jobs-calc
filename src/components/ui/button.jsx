@@ -6,7 +6,7 @@ export default function Button({
   children,
 }) {
   const baseClass =
-    "py-3 p-6 h-fit flex gap-4 items-center justify-center uppercase rounded-md transition-all hover:brightness-110 text-xs font-bold";
+    "py-3 h-fit flex gap-4 items-center justify-center uppercase rounded-md transition-all hover:brightness-110 text-xs font-bold max-sm:py-1.5 max-sm:ps-1.5";
   const variantClass = {
     light: "bg-zinc-200 text-zinc-500",
     submit: "bg-green-600 text-zinc-100",
@@ -15,7 +15,7 @@ export default function Button({
   };
   const sizeClass = {
     full: "w-full",
-    button: "w-[170px]",
+    button: "w-[170px] max-sm:py-3",
   };
 
   return (

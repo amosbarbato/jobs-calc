@@ -27,12 +27,12 @@ function CalcHourlyRate({ isOpen, onClose }) {
   };
 
   return isOpen ? (
-    <div className="fixed inset-0 bg-gray-100 min-h-screen">
+    <div className="fixed inset-0 bg-gray-100 min-h-screen max-sm:overflow-scroll">
       <Title onClick={onClose} title="Calculadora" />
 
-      <div className="flex justify-between py-12 max-w-5xl mx-auto">
+      <div className="flex justify-between py-12 max-w-5xl mx-auto max-sm:gap-8 max-sm:flex-col max-sm:flex-col-reverse max-sm:w-full max-sm:p-8">
         <Aside>
-          <img src={calc} className="w-20" />
+          <img src={calc} className="w-20 max-sm:hidden" />
           <p className="text-center text-sm text-gray-600">
             O valor da sua hora é <br />
             <strong className="text-lg">R$</strong>
@@ -48,8 +48,8 @@ function CalcHourlyRate({ isOpen, onClose }) {
         </Aside>
 
         <Form subTitle="Planejamento">
-          <div className="grid grid-cols-2 gap-6">
-            <div className="grid gap-4">
+          <div className="grid grid-cols-2 gap-6 max-sm:gap-4 max-sm:flex-col max-sm:flex">
+            <div className="grid gap-4 max-sm:gap-2">
               <Label htmlFor="monthly-income">
                 Quanto eu <br /> quero ganhar por mês?
               </Label>
@@ -63,7 +63,7 @@ function CalcHourlyRate({ isOpen, onClose }) {
               />
             </div>
 
-            <div className="grid gap-4">
+            <div className="grid gap-4 max-sm:gap-2">
               <Label htmlFor="hours-per-day">
                 Quantas horas <br /> quero trabalhar por dia?
               </Label>
@@ -77,8 +77,8 @@ function CalcHourlyRate({ isOpen, onClose }) {
             </div>
           </div>
 
-          <div className="flex gap-4 mt-6">
-            <div className="grid gap-3">
+          <div className="flex gap-4 mt-6 max-sm:mt-4">
+            <div className="grid gap-3 max-sm:gap-2">
               <Label htmlFor="days-per-week">
                 Quantos dias quero trabalhar por semana?
               </Label>

@@ -11,20 +11,25 @@ function Header({ onCalculate, onRegister }) {
       <div className="max-w-5xl mx-auto">
         <section
           id="top"
-          className="flex justify-between items-center border-b border-b-zinc-600 pb-8"
+          className="flex justify-between items-center border-b border-b-zinc-600 pb-8 max-sm:pb-4"
         >
-          <img src={logo} alt="JobsCalc" />
+          <img src={logo} alt="JobsCalc" className="max-sm:w-36" />
           <button
             id="calc-profile"
-            className="flex items-center gap-5 hover:text-orange-400 "
+            className="flex items-center gap-5 hover:text-orange-400 max-sm:bg-zinc-600 max-sm:p-3 rounded-full"
             onClick={onCalculate}
           >
-            <strong className="text-xl text-end">Calculadora</strong>
-            <img src={calc} className="w-16" />
+            <strong className="text-xl text-end max-sm:hidden">
+              Calculadora
+            </strong>
+            <img src={calc} className="w-16 max-sm:w-6" />
           </button>
         </section>
 
-        <section id="summary" className="flex justify-between items-center">
+        <section
+          id="summary"
+          className="flex justify-between items-center max-sm:flex-col"
+        >
           <Summary />
 
           <Button

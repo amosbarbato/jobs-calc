@@ -31,7 +31,7 @@ export default function App() {
     <JobsProvider>
       <Header onCalculate={openCalculator} onRegister={openRegister} />
 
-      <main className="max-w-5xl mx-auto -mt-8">
+      <main className="max-w-5xl mx-auto -mt-8 max-sm:mt-0">
         <JobList />
       </main>
 
